@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 class KStyles {
   static Color kPageColor = const Color(0xff090909);
   static String fontFamily = 'EuclidSemibold';
-  static double kEighteenFontSize = SizeConfig.screenWidth! * 0.046; //* 18 px
-  static double kThirteenFontSize = SizeConfig.screenWidth! * 0.0331; //* 13 px
-  static double kTwelveFontSize = SizeConfig.screenWidth! * 0.0306; //* 12 px
+  static double kEighteenSize = SizeConfig.screenWidth! * 0.046; //* 18 px
+  static double kThirteenSize = SizeConfig.screenWidth! * 0.0331; //* 13 px
+  static double kTwelveSize = SizeConfig.screenWidth! * 0.0306; //* 12 px
   static double kTwentyFourSize = SizeConfig.screenWidth! * 0.061; //* 24 px
   static double kNineteenSize = SizeConfig.screenWidth! * 0.049; //* 19 px
   static double kFifteenSize = SizeConfig.screenWidth! * 0.0382; //* 15 px
   static double kFourtySize = SizeConfig.screenWidth! * 0.1; //* 40 px
+  static double kThirtySize = SizeConfig.screenWidth! * 0.068;
+  static double kThirtySevenSize = SizeConfig.screenWidth! * 0.084;
   static Color kWhiteColor = const Color(0xFFFFFFFF);
   static Color kButtonColor = const Color(0xffE50914);
   static BorderRadius kBorderRadius = BorderRadius.circular(18.0);
@@ -25,7 +27,7 @@ class KStyles {
   static TextStyle kHeaderTextStyle(BuildContext context) {
     var kHeaderTextStyle = TextStyle(
       fontFamily: fontFamily,
-      fontSize: kEighteenFontSize,
+      fontSize: kEighteenSize,
       color: kWhiteColor,
       decoration: TextDecoration.none,
     );
@@ -35,7 +37,7 @@ class KStyles {
   static TextStyle kSubtitleTextStyle(BuildContext context) {
     var kSubtitleTextStyle = TextStyle(
       fontFamily: fontFamily,
-      fontSize: kThirteenFontSize,
+      fontSize: kThirteenSize,
       color: kWhiteColor,
       decoration: TextDecoration.none,
     );
@@ -45,7 +47,7 @@ class KStyles {
   static TextStyle kInputHintTextStyle(BuildContext context) {
     var kSubtitleTextStyle = TextStyle(
       fontFamily: fontFamily,
-      fontSize: kTwelveFontSize,
+      fontSize: kTwelveSize,
       color: kWhiteColor.withValues(alpha: 0.5),
     );
     return kSubtitleTextStyle;
@@ -54,7 +56,7 @@ class KStyles {
   static TextStyle kTextButtonTextStyle(BuildContext context) {
     var kSubtitleTextStyle = TextStyle(
       fontFamily: fontFamily,
-      fontSize: kTwelveFontSize,
+      fontSize: kTwelveSize,
       color: kWhiteColor,
       decoration: TextDecoration.underline,
       decorationColor: kWhiteColor,
@@ -95,14 +97,17 @@ class KStyles {
   static InputDecoration kInputDecoration(
     BuildContext context,
     String hintText,
-    String prefixIconPath,
-  ) {
+    String prefixIcon, {
+    String trailingIcon = 'assets/icons/hide.png',
+    bool hasTrailing = false,
+  }) {
     var kInputDecoration = InputDecoration(
       filled: true,
       fillColor: kWhiteColor.withValues(alpha: 0.1),
       hintText: hintText,
       hintStyle: kInputHintTextStyle(context),
-      prefixIcon: Image.asset(prefixIconPath),
+      prefixIcon: Image.asset(prefixIcon),
+      suffixIcon: hasTrailing ? Image.asset(trailingIcon) : null,
       border: OutlineInputBorder(
         borderRadius: kBorderRadius,
         borderSide: BorderSide.none,
