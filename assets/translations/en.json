@@ -34,5 +34,11 @@
   "pick_token_for_unlock_features": "Choose a token package to unlock features",
   "token": "Token",
   "for_weekly": "Per Week",
-  "see_all_tokens": "See All Tokens"
+  "see_all_tokens": "See All Tokens",
+  "error": "Error!",
+  "unexpected_error": "Unexpected Error. Please try again later.",
+  "sorry": "Sorry",
+  "will_be_add_later": "This feature will be added in the next updates.We are sorry for the inconvenience.",
+  "button_cancel": "Cancel",
+  "button_understand": "Understand"
 }

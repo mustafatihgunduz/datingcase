@@ -34,5 +34,11 @@
   "pick_token_for_unlock_features": "Kilidi açmak için bir jeton paketi seçin",
   "token": "Jeton",
   "for_weekly": "Başına Haftalık",
-  "see_all_tokens": "Tüm Jetonları Gör"
+  "see_all_tokens": "Tüm Jetonları Gör",
+  "error": "Hata!",
+  "unexpected_error": "Beklenmedik Hata. Lütfen daha sonra tekrar deneyiniz.",
+  "sorry": "Üzgünüz",
+  "will_be_add_later": "Bu özellik bir sonraki güncellemelerde eklenecektir. Yaşattığımız sorun için üzgünüz.",
+  "button_cancel": "İptal",
+  "button_understand": "Anladım"
 }

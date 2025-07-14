@@ -39,5 +39,11 @@ abstract class  LocaleKeys {
   static const token = 'token';
   static const for_weekly = 'for_weekly';
   static const see_all_tokens = 'see_all_tokens';
+  static const error = 'error';
+  static const unexpected_error = 'unexpected_error';
+  static const sorry = 'sorry';
+  static const will_be_add_later = 'will_be_add_later';
+  static const button_cancel = 'button_cancel';
+  static const button_understand = 'button_understand';
 
 }

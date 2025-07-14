@@ -1,9 +1,13 @@
 import 'package:datingcase/constants/styles.dart';
+import 'package:datingcase/core/services/navigation_service.dart';
 import 'package:datingcase/generated/locale_keys.g.dart';
 import 'package:datingcase/utils/size_config.dart';
-import 'package:datingcase/view/auth/components/atoms/custom_text_field.dart';
+import 'package:datingcase/view/auth/components/atoms/custom_auth_button.dart';
+import 'package:datingcase/view/auth/components/custom_bottom_navigate.dart';
 import 'package:datingcase/view/auth/components/custom_social_container_row.dart';
+import 'package:datingcase/view/auth/components/register_form.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -14,6 +18,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final NavigationService _navigationService = NavigationService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _rePasswordController = TextEditingController();
@@ -31,6 +36,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final template = LocaleKeys.aggrement_text.tr();
+    final linkText = LocaleKeys.terms_link.tr();
+    final parts = template.split('{link}');
     return Scaffold(
       backgroundColor: KStyles.kPageColor,
       body: Padding(
@@ -63,57 +71,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       SizedBox(height: KStyles.kFourtySize),
 
-                      CustomTextField(
-                        controller: _fullNameController,
-                        hintText: LocaleKeys.fullname.tr(),
-                        leadingIcon: 'assets/icons/user.png',
-                        hasTrailing: false,
-                      ),
-                      SizedBox(height: KStyles.kThirteenSize),
-
-                      CustomTextField(
-                        controller: _emailController,
-                        hintText: LocaleKeys.email.tr(),
-                        leadingIcon: 'assets/icons/email.png',
-                        hasTrailing: false,
-                      ),
-                      SizedBox(height: KStyles.kThirteenSize),
-                      CustomTextField(
-                        controller: _passwordController,
-                        hintText: LocaleKeys.password.tr(),
-                        leadingIcon: 'assets/icons/password.png',
-                        hasTrailing: true,
-                      ),
-                      SizedBox(height: KStyles.kThirteenSize),
-                      CustomTextField(
-                        controller: _rePasswordController,
-                        hintText: LocaleKeys.re_password.tr(),
-                        leadingIcon: 'assets/icons/password.png',
-                        hasTrailing: true,
+                      RegisterForm(
+                        fullNameController: _fullNameController,
+                        emailController: _emailController,
+                        passwordController: _passwordController,
+                        rePasswordController: _rePasswordController,
                       ),
 
                       SizedBox(height: KStyles.kThirtySize),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            LocaleKeys.forgot_my_password.tr(),
-                            style: KStyles.kTextButtonTextStyle(context),
-                          ),
+                      RichText(
+                        text: TextSpan(
+                          style: KStyles.kInputHintTextStyle(context),
+                          children: [
+                            if (parts[0].isNotEmpty) TextSpan(text: parts[0]),
+                            TextSpan(
+                              text: linkText,
+                              style: KStyles.kTextButtonTextStyle(context),
+                              recognizer: TapGestureRecognizer(),
+                            ),
+                            if (parts.length > 1 && parts[1].isNotEmpty)
+                              TextSpan(text: parts[1]),
+                          ],
                         ),
                       ),
                       SizedBox(height: KStyles.kTwentyFourSize),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: KStyles.kButtonStyle(context),
-                          child: Text(
-                            LocaleKeys.now_register.tr(),
-                            style: KStyles.kButtonTextStyle(context),
-                          ),
-                        ),
+                      CustomAuthButton(
+                        title: LocaleKeys.now_register.tr(),
+                        onTap: () {
+                          _navigationService.navigateTo('/userInformation');
+                        },
                       ),
                       SizedBox(height: KStyles.kThirtySevenSize),
                       SocialAuthRow(),
@@ -122,21 +108,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  LocaleKeys.already_have_an_account.tr(),
-                  style: KStyles.kInputHintTextStyle(context),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    LocaleKeys.login_button.tr(),
-                    style: KStyles.kTextButtonTextStyle(context),
-                  ),
-                ),
-              ],
+            CustomBottomNavigate(
+              navigationService: _navigationService,
+              title: LocaleKeys.already_have_an_account.tr(),
+              route: '/login',
+              buttonTitle: LocaleKeys.login_button.tr(),
             ),
           ],
         ),

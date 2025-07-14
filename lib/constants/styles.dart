@@ -11,17 +11,37 @@ class KStyles {
   static double kNineteenSize = SizeConfig.screenWidth! * 0.049; //* 19 px
   static double kFifteenSize = SizeConfig.screenWidth! * 0.0382; //* 15 px
   static double kFourtySize = SizeConfig.screenWidth! * 0.1; //* 40 px
+  static double kFiftySize = SizeConfig.screenWidth! * 0.114; //* 50px
+  static double kFourtyEightSize = SizeConfig.screenWidth! * 0.11; //* 48px
   static double kThirtySize = SizeConfig.screenWidth! * 0.068;
+  static double kThirtySixSize = SizeConfig.screenWidth! * 0.082;
+  static double kEightSize = SizeConfig.screenWidth! * 0.018; //* 8
+  static double kFourSize = SizeConfig.screenWidth! * 0.009; //* 4
+  static double kNineSize = SizeConfig.screenWidth! * 0.021; //* 9
+  static double kThirtyThreeSize = SizeConfig.screenWidth! * 0.075; //* 33px
+  static double kTwentySixSize = SizeConfig.screenWidth! * 0.06; //* 26
   static double kThirtySevenSize = SizeConfig.screenWidth! * 0.084;
+  static double kSeventySize = SizeConfig.screenWidth! * 0.16; //* 70px
   static Color kWhiteColor = const Color(0xFFFFFFFF);
   static Color kButtonColor = const Color(0xffE50914);
   static BorderRadius kBorderRadius = BorderRadius.circular(18.0);
+  static BorderRadius kBottomNavbarRadius = BorderRadius.circular(5.0);
+  static BorderRadius kAddPhotoRadius = BorderRadius.circular(33.0);
   static EdgeInsets kButtonPadding = EdgeInsets.symmetric(
     vertical: SizeConfig.screenWidth! * 0.0438, //* 17 px
+  );
+  static EdgeInsets kLimitedOfferButtonPadding = EdgeInsets.symmetric(
+    horizontal: kNineSize,
+    vertical: kNineSize,
   );
   static EdgeInsets kSocialContainerPadding = EdgeInsets.symmetric(
     horizontal: SizeConfig.screenWidth! * 0.051, //* 20 px
     vertical: SizeConfig.screenWidth! * 0.051, //* 20 px
+  );
+
+  static EdgeInsets kBottomNavbarContainerPadding = EdgeInsets.symmetric(
+    horizontal: kFifteenSize,
+    vertical: kThirteenSize,
   );
 
   static TextStyle kHeaderTextStyle(BuildContext context) {
@@ -32,6 +52,27 @@ class KStyles {
       decoration: TextDecoration.none,
     );
     return kHeaderTextStyle;
+  }
+
+  static TextStyle kAppbarTitleTextStyle(BuildContext context) {
+    var kAppbarTitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kFifteenSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.none,
+    );
+    return kAppbarTitleTextStyle;
+  }
+
+  static TextStyle kBottomNavbarTitleTextStyle(BuildContext context) {
+    var kBottomNavbarTitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kTwelveSize,
+      color: kWhiteColor,
+      fontWeight: FontWeight.bold,
+      decoration: TextDecoration.none,
+    );
+    return kBottomNavbarTitleTextStyle;
   }
 
   static TextStyle kSubtitleTextStyle(BuildContext context) {
@@ -74,10 +115,54 @@ class KStyles {
     return kButtonTextStyle;
   }
 
+  static TextStyle kLimitedOfferButtonTextStyle(BuildContext context) {
+    var kButtonTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kTwelveSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.none,
+    );
+    return kButtonTextStyle;
+  }
+
+  static TextStyle kAlertDialogTextStyle(BuildContext context) {
+    var kButtonTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kFifteenSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.none,
+    );
+    return kButtonTextStyle;
+  }
+
+  static TextStyle kAlertDialogButtonTextStyle(
+    BuildContext context,
+    Color color,
+  ) {
+    var kButtonTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kTwelveSize,
+      color: color,
+      decoration: TextDecoration.none,
+    );
+    return kButtonTextStyle;
+  }
+
   static ButtonStyle kButtonStyle(BuildContext context) {
     var kButtonStyle = ButtonStyle(
       backgroundColor: WidgetStatePropertyAll<Color>(kButtonColor),
       padding: WidgetStatePropertyAll<EdgeInsets>(kButtonPadding),
+      shape: WidgetStatePropertyAll<OutlinedBorder>(
+        RoundedRectangleBorder(borderRadius: kBorderRadius),
+      ),
+    );
+    return kButtonStyle;
+  }
+
+  static ButtonStyle kLimitedOfferButtonStyle(BuildContext context) {
+    var kButtonStyle = ButtonStyle(
+      backgroundColor: WidgetStatePropertyAll<Color>(kButtonColor),
+      padding: WidgetStatePropertyAll<EdgeInsets>(kLimitedOfferButtonPadding),
       shape: WidgetStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: kBorderRadius),
       ),
@@ -92,6 +177,33 @@ class KStyles {
       borderRadius: kBorderRadius,
     );
     return kSocialContainerDecoration;
+  }
+
+  static BoxDecoration kBackButtonContainerDecoration() {
+    var kBackButtonContainerDecoration = BoxDecoration(
+      color: kWhiteColor.withValues(alpha: 0.1),
+      border: Border.all(color: kWhiteColor.withValues(alpha: 0.2), width: 1.0),
+      shape: BoxShape.circle,
+    );
+    return kBackButtonContainerDecoration;
+  }
+
+  static BoxDecoration kAddPhotoContainerDecoration() {
+    var kAddPhotoContainerDecoration = BoxDecoration(
+      color: kWhiteColor.withValues(alpha: 0.1),
+      border: Border.all(color: kWhiteColor.withValues(alpha: 0.2), width: 1.0),
+      borderRadius: kAddPhotoRadius,
+    );
+    return kAddPhotoContainerDecoration;
+  }
+
+  static BoxDecoration kBottomNavbarContainerDecoration() {
+    var kBottomNavbarContainerDecoration = BoxDecoration(
+      color: kWhiteColor.withValues(alpha: 0.1),
+      border: Border.all(color: kWhiteColor.withValues(alpha: 0.2), width: 1.0),
+      borderRadius: kBottomNavbarRadius,
+    );
+    return kBottomNavbarContainerDecoration;
   }
 
   static InputDecoration kInputDecoration(
