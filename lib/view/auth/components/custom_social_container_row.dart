@@ -9,13 +9,13 @@ class SocialAuthRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NavigationService _navigationService = NavigationService();
+    final NavigationService navigationService = NavigationService();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SocialAuthContainer(
           onTap: () {
-            featureAddLater(context, _navigationService);
+            featureAddLater(context, navigationService);
           },
           iconPath: 'assets/icons/google-icon.png',
         ),
@@ -25,14 +25,14 @@ class SocialAuthRow extends StatelessWidget {
           ),
           child: SocialAuthContainer(
             onTap: () {
-              featureAddLater(context, _navigationService);
+              featureAddLater(context, navigationService);
             },
             iconPath: 'assets/icons/apple-icon.png',
           ),
         ),
         SocialAuthContainer(
           onTap: () {
-            featureAddLater(context, _navigationService);
+            featureAddLater(context, navigationService);
           },
           iconPath: 'assets/icons/facebook-icon.png',
         ),

@@ -20,10 +20,14 @@ class KStyles {
   static double kNineSize = SizeConfig.screenWidth! * 0.021; //* 9
   static double kThirtyThreeSize = SizeConfig.screenWidth! * 0.075; //* 33px
   static double kTwentySixSize = SizeConfig.screenWidth! * 0.06; //* 26
+  static double kTwentyTwoSize = SizeConfig.screenWidth! * 0.05; //* 22px
+  static double kThirtyOneSize = SizeConfig.screenWidth! * 0.07; //* 31px
   static double kThirtySevenSize = SizeConfig.screenWidth! * 0.084;
   static double kSeventySize = SizeConfig.screenWidth! * 0.16; //* 70px
+  static double kTwentySize = SizeConfig.screenWidth! * 0.051; //*20px
   static Color kWhiteColor = const Color(0xFFFFFFFF);
   static Color kButtonColor = const Color(0xffE50914);
+  static Color kLimitedBoxShadowColor = const Color(0xff6F060B);
   static BorderRadius kBorderRadius = BorderRadius.circular(18.0);
   static BorderRadius kBottomNavbarRadius = BorderRadius.circular(5.0);
   static BorderRadius kAddPhotoRadius = BorderRadius.circular(33.0);
@@ -35,8 +39,8 @@ class KStyles {
     vertical: kNineSize,
   );
   static EdgeInsets kSocialContainerPadding = EdgeInsets.symmetric(
-    horizontal: SizeConfig.screenWidth! * 0.051, //* 20 px
-    vertical: SizeConfig.screenWidth! * 0.051, //* 20 px
+    horizontal: kTwentySize,
+    vertical: kTwentySize,
   );
 
   static EdgeInsets kBottomNavbarContainerPadding = EdgeInsets.symmetric(
@@ -94,6 +98,25 @@ class KStyles {
     return kSubtitleTextStyle;
   }
 
+  static TextStyle kMovieTitleTextStyle(BuildContext context) {
+    var kSubtitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kTwelveSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.none,
+    );
+    return kSubtitleTextStyle;
+  }
+
+  static TextStyle kMovieYearTextStyle(BuildContext context) {
+    var kSubtitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kTwelveSize,
+      color: kWhiteColor.withValues(alpha: 0.5),
+    );
+    return kSubtitleTextStyle;
+  }
+
   static TextStyle kTextButtonTextStyle(BuildContext context) {
     var kSubtitleTextStyle = TextStyle(
       fontFamily: fontFamily,
@@ -135,6 +158,61 @@ class KStyles {
     return kButtonTextStyle;
   }
 
+  static TextStyle kLimitedBoxHeaderTextStyle(BuildContext context) {
+    var kLimitedBoxHeaderTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kTwentySize,
+      color: kWhiteColor,
+      decoration: TextDecoration.none,
+      fontWeight: FontWeight.bold,
+    );
+    return kLimitedBoxHeaderTextStyle;
+  }
+
+  static TextStyle kLimitedBoxDescriptionTextStyle(BuildContext context) {
+    var kLimitedBoxDescriptionTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kTwelveSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.none,
+      fontWeight: FontWeight.normal,
+    );
+    return kLimitedBoxDescriptionTextStyle;
+  }
+
+  static TextStyle kLimitedBoxTitleTextStyle(BuildContext context) {
+    var kLimitedBoxTitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kFifteenSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.none,
+      fontWeight: FontWeight.w500,
+    );
+    return kLimitedBoxTitleTextStyle;
+  }
+
+  static TextStyle kLimitedBoxNumberWithLineTextStyle(BuildContext context) {
+    var kLimitedBoxTitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kFifteenSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.lineThrough,
+      fontWeight: FontWeight.w500,
+    );
+    return kLimitedBoxTitleTextStyle;
+  }
+
+  static TextStyle kLimitedBoxNumberTextStyle(BuildContext context) {
+    var kLimitedBoxTitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kTwentySixSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.lineThrough,
+      fontWeight: FontWeight.bold,
+    );
+    return kLimitedBoxTitleTextStyle;
+  }
+
   static TextStyle kAlertDialogButtonTextStyle(
     BuildContext context,
     Color color,
@@ -151,7 +229,9 @@ class KStyles {
   static ButtonStyle kButtonStyle(BuildContext context) {
     var kButtonStyle = ButtonStyle(
       backgroundColor: WidgetStatePropertyAll<Color>(kButtonColor),
-      padding: WidgetStatePropertyAll<EdgeInsets>(kButtonPadding),
+      padding: WidgetStatePropertyAll<EdgeInsets>(
+        EdgeInsets.symmetric(horizontal: kEighteenSize, vertical: kNineSize),
+      ),
       shape: WidgetStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: kBorderRadius),
       ),

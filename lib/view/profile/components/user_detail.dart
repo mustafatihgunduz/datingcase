@@ -4,42 +4,74 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class UserDetail extends StatelessWidget {
-  const UserDetail({super.key});
-
+  UserDetail({
+    super.key,
+    required this.image,
+    required this.userName,
+    required this.userID,
+  });
+  String image;
+  String userName;
+  String userID;
   @override
   Widget build(BuildContext context) {
+    String cutId() {
+      if (userID.length >= 15) {
+        return userID.substring(0, 15) + "...";
+      } else {
+        return userID;
+      }
+    }
+
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          width: 62,
-          height: 62,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.amber,
+        Flexible(
+          child: Row(
+            children: [
+              Container(
+                width: 62,
+                height: 62,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      image == "" ? "https://picsum.photos/200" : image,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              SizedBox(width: KStyles.kEightSize),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      userName,
+                      style: KStyles.kAppbarTitleTextStyle(context),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    Text(
+                      'ID: ${cutId()}',
+                      style: KStyles.kInputHintTextStyle(context),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        SizedBox(width: KStyles.kEightSize),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Mustafa  Gündüz',
-              style: KStyles.kAppbarTitleTextStyle(context),
-            ),
-            Text('ID: 123456', style: KStyles.kInputHintTextStyle(context)),
-          ],
-        ),
         SizedBox(width: KStyles.kThirtySixSize),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {},
-            style: KStyles.kButtonStyle(context),
-            child: FittedBox(
-              child: Text(
-                LocaleKeys.add_picture.tr(),
-                style: KStyles.kButtonTextStyle(context),
-              ),
-            ),
+        ElevatedButton(
+          onPressed: () {},
+          style: KStyles.kButtonStyle(context),
+          child: Text(
+            LocaleKeys.add_picture.tr(),
+            style: KStyles.kButtonTextStyle(context),
           ),
         ),
       ],

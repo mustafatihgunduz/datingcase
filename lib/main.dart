@@ -1,8 +1,16 @@
+import 'package:datingcase/core/repository/auth_repository.dart';
+import 'package:datingcase/core/repository/movie_repository.dart';
+import 'package:datingcase/core/repository/user_repository.dart';
+import 'package:datingcase/core/services/auth_service.dart';
+import 'package:datingcase/core/services/movie_service.dart';
 import 'package:datingcase/core/services/navigation_service.dart';
 import 'package:datingcase/core/services/secure_storage_service.dart';
+import 'package:datingcase/core/services/user_service.dart';
 import 'package:datingcase/core/viewmodel/auth_view_model.dart';
+import 'package:datingcase/core/viewmodel/movie_view_model.dart';
+import 'package:datingcase/core/viewmodel/user_view_model.dart';
 import 'package:datingcase/utils/routes.dart';
-import 'package:datingcase/view/auth/login_screen.dart';
+import 'package:datingcase/view/check/auth_check.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +31,14 @@ void main() async {
 }
 
 final SecureStorageService secureStorageService = SecureStorageService();
+final UserService userService = UserService();
+final UserRepository userRepository = UserRepository(userService: userService);
+final AuthService authService = AuthService();
+final AuthRepository authRepository = AuthRepository(authService: authService);
+final MovieService movieService = MovieService();
+final MovieRepository movieRepository = MovieRepository(
+  movieService: movieService,
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -31,7 +47,16 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(
-          create: (_) => AuthBloc(storageService: secureStorageService),
+          create: (_) => AuthBloc(
+            storageService: secureStorageService,
+            authRepository: authRepository,
+          ),
+        ),
+        BlocProvider(create: (_) => UserBloc(userRepository: userRepository)),
+        BlocProvider<MovieBloc>(
+          create: (_) =>
+              MovieBloc(movieRepository: movieRepository)
+                ..add(LoadInitialMovies()),
         ),
       ],
       child: MaterialApp(
@@ -45,7 +70,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         routes: appRoutes,
-        home: LoginScreen(),
+        home: AuthCheck(),
       ),
     );
   }

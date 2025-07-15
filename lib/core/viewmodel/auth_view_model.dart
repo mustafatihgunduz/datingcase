@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:datingcase/core/model/user.dart';
-import 'package:datingcase/core/services/auth_service.dart';
+import 'package:datingcase/core/repository/auth_repository.dart';
 import 'package:datingcase/core/services/logger_service.dart';
 import 'package:datingcase/core/services/navigation_service.dart';
 import 'package:datingcase/core/services/secure_storage_service.dart';
@@ -58,8 +58,10 @@ class AuthLogoutRequest extends AuthEvent {
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SecureStorageService storageService;
+  final AuthRepository authRepository;
 
-  AuthBloc({required this.storageService}) : super(AuthInitial()) {
+  AuthBloc({required this.storageService, required this.authRepository})
+    : super(AuthInitial()) {
     on<AuthLoginRequested>(_handleLogin);
     on<AuthRegisterRequest>(_handleRegister);
     on<AuthLogoutRequest>(_handleLogout);
@@ -74,11 +76,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     try {
       final navigationService = NavigationService();
-      final user = await login(event.email, event.password);
+      final user = await authRepository.login(event.email, event.password);
       if (user.token != null) {
         await storageService.saveToken(user.token!);
         CaseLogger.info('AuthBloc: Token saved securely');
-        navigationService.pushReplacement('/home');
+        navigationService.pushReplacement('/nav');
       }
       emit(AuthSuccess(user));
     } catch (e, s) {
@@ -95,9 +97,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     try {
       final navigationService = NavigationService();
-      final user = await register(event.email, event.password, event.name);
+      final user = await authRepository.register(
+        event.email,
+        event.password,
+        event.name,
+      );
       if (user.token != null) {
-        CaseLogger.info('AuthBloc: Token saved securely');
+        await storageService.saveToken(user.token!);
+
+        CaseLogger.info(
+          'AuthBloc: User Token is not null navigating /userInformation..',
+        );
         navigationService.navigateTo('/userInformation', arguments: user);
       }
       emit(AuthSuccess(user));
@@ -117,7 +127,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       String? finalPhotoUrl = event.user.photoUrl;
 
       if (event.imageFile != null) {
-        final uploadedUrl = await updatePhoto(event.imageFile!);
+        final uploadedUrl = await authRepository.updatePhoto(event.imageFile!);
         finalPhotoUrl = uploadedUrl;
         CaseLogger.info('AuthBloc: Photo uploaded: $uploadedUrl');
       }
@@ -125,6 +135,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (event.user.token != null) {
         await storageService.saveToken(event.user.token!);
         CaseLogger.info('AuthBloc: Token saved securely');
+        final navigationService = NavigationService();
+        navigationService.pushReplacement('/nav');
       } else {
         throw Exception('Token not found in user object');
       }
@@ -143,7 +155,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     CaseLogger.info('AuthBloc: Logout request received');
     emit(AuthLoading());
     try {
-      await logout();
+      await authRepository.logout();
       emit(AuthInitial());
     } catch (e, s) {
       CaseLogger.error('AuthBloc: Logout failed', e, s);

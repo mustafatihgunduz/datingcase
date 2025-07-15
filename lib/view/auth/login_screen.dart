@@ -34,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return Scaffold(
       backgroundColor: KStyles.kPageColor,
       body: BlocConsumer<AuthBloc, AuthState>(
