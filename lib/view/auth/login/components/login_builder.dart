@@ -46,40 +46,46 @@ class LoginBuilder extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LoginTitle(),
-                        LoginDescription(),
-                        SizedBox(height: KStyles.kFourtySize),
-                        LoginForm(
-                          formKey: _formKey,
-                          emailController: _emailController,
-                          passwordController: _passwordController,
-                        ),
-                        SizedBox(height: KStyles.kThirtySize),
-                        ForgotPassword(navigationService: _navigationService),
-                        SizedBox(height: KStyles.kTwentyFourSize),
-                        CustomAuthButton(
-                          title: LocaleKeys.login.tr(),
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              context.read<AuthBloc>().add(
-                                AuthLoginRequested(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ),
-                              );
-                            }
-                          },
-                        ),
-                        SizedBox(height: KStyles.kThirtySevenSize),
-                        SocialAuthRow(),
-                      ],
+                child: SingleChildScrollView(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: SizeConfig.screenHeight! / 1.1,
+                    ),
+                    child: IntrinsicHeight(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Spacer(),
+                          LoginTitle(),
+                          LoginDescription(),
+                          SizedBox(height: KStyles.kFourtySize),
+                          LoginForm(
+                            formKey: _formKey,
+                            emailController: _emailController,
+                            passwordController: _passwordController,
+                          ),
+                          SizedBox(height: KStyles.kThirtySize),
+                          ForgotPassword(navigationService: _navigationService),
+                          SizedBox(height: KStyles.kTwentyFourSize),
+                          CustomAuthButton(
+                            title: LocaleKeys.login.tr(),
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<AuthBloc>().add(
+                                  AuthLoginRequested(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                          SizedBox(height: KStyles.kThirtySevenSize),
+                          SocialAuthRow(),
+                        ],
+                      ),
                     ),
                   ),
                 ),

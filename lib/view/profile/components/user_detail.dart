@@ -68,7 +68,7 @@ class UserDetail extends StatelessWidget {
         SizedBox(width: KStyles.kThirtySixSize),
         ElevatedButton(
           onPressed: () {},
-          style: KStyles.kButtonStyle(context),
+          style: KStyles.kButtonStyle(context, isProfile: true),
           child: Text(
             LocaleKeys.add_picture.tr(),
             style: KStyles.kButtonTextStyle(context),

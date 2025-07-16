@@ -250,11 +250,17 @@ class KStyles {
     return kButtonTextStyle;
   }
 
-  static ButtonStyle kButtonStyle(BuildContext context) {
+  static ButtonStyle kButtonStyle(
+    BuildContext context, {
+    bool isProfile = false,
+  }) {
     var kButtonStyle = ButtonStyle(
       backgroundColor: WidgetStatePropertyAll<Color>(kButtonColor),
       padding: WidgetStatePropertyAll<EdgeInsets>(
-        EdgeInsets.symmetric(horizontal: kEighteenSize, vertical: kNineSize),
+        EdgeInsets.symmetric(
+          horizontal: kEighteenSize,
+          vertical: isProfile ? kNineSize : kEighteenSize,
+        ),
       ),
       shape: WidgetStatePropertyAll<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: kBorderRadius),
