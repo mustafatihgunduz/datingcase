@@ -25,11 +25,13 @@ class RegisterBuilder extends StatelessWidget {
     required this.parts,
     required this.linkText,
     required NavigationService navigationService,
+    required GlobalKey<FormState> formKey,
   }) : _fullNameController = fullNameController,
        _emailController = emailController,
        _passwordController = passwordController,
        _rePasswordController = rePasswordController,
-       _navigationService = navigationService;
+       _navigationService = navigationService,
+       _formKey = formKey;
 
   final TextEditingController _fullNameController;
   final TextEditingController _emailController;
@@ -38,6 +40,7 @@ class RegisterBuilder extends StatelessWidget {
   final List<String> parts;
   final String linkText;
   final NavigationService _navigationService;
+  final GlobalKey<FormState> _formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,7 @@ class RegisterBuilder extends StatelessWidget {
                           emailController: _emailController,
                           passwordController: _passwordController,
                           rePasswordController: _rePasswordController,
+                          formKey: _formKey,
                         ),
 
                         SizedBox(height: KStyles.kThirtySize),
@@ -77,13 +81,15 @@ class RegisterBuilder extends StatelessWidget {
                         CustomAuthButton(
                           title: LocaleKeys.now_register.tr(),
                           onTap: () async {
-                            context.read<AuthBloc>().add(
-                              AuthRegisterRequest(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                                name: _fullNameController.text,
-                              ),
-                            );
+                            if (_formKey.currentState!.validate()) {
+                              context.read<AuthBloc>().add(
+                                AuthRegisterRequest(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                  name: _fullNameController.text,
+                                ),
+                              );
+                            }
                           },
                         ),
                         SizedBox(height: KStyles.kThirtySevenSize),

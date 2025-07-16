@@ -14,6 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final NavigationService _navigationService = NavigationService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -30,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController: _emailController,
         passwordController: _passwordController,
         navigationService: _navigationService,
+        formKey: _formKey,
       ),
     );
   }

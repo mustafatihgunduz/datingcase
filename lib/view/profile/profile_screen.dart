@@ -44,9 +44,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         navigationService: _navigationService,
         isProfileScreen: true,
       ),
-      title: Text(
-        LocaleKeys.profile_detail.tr(),
-        style: KStyles.kAppbarTitleTextStyle(context),
+      title: Center(
+        child: Text(
+          LocaleKeys.profile_detail.tr(),
+          style: KStyles.kAppbarTitleTextStyle(context),
+        ),
       ),
       actions: [
         ElevatedButton(

@@ -21,13 +21,16 @@ class LoginBuilder extends StatelessWidget {
     required TextEditingController emailController,
     required TextEditingController passwordController,
     required NavigationService navigationService,
+    required GlobalKey<FormState> formKey,
   }) : _emailController = emailController,
        _passwordController = passwordController,
-       _navigationService = navigationService;
+       _navigationService = navigationService,
+       _formKey = formKey;
 
   final TextEditingController _emailController;
   final TextEditingController _passwordController;
   final NavigationService _navigationService;
+  final GlobalKey<FormState> _formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +57,7 @@ class LoginBuilder extends StatelessWidget {
                         LoginDescription(),
                         SizedBox(height: KStyles.kFourtySize),
                         LoginForm(
+                          formKey: _formKey,
                           emailController: _emailController,
                           passwordController: _passwordController,
                         ),
@@ -63,12 +67,14 @@ class LoginBuilder extends StatelessWidget {
                         CustomAuthButton(
                           title: LocaleKeys.login.tr(),
                           onTap: () {
-                            context.read<AuthBloc>().add(
-                              AuthLoginRequested(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              ),
-                            );
+                            if (_formKey.currentState!.validate()) {
+                              context.read<AuthBloc>().add(
+                                AuthLoginRequested(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
+                            }
                           },
                         ),
                         SizedBox(height: KStyles.kThirtySevenSize),

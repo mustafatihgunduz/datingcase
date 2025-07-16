@@ -40,5 +40,6 @@
   "sorry": "Üzgünüz",
   "will_be_add_later": "Bu özellik bir sonraki güncellemelerde eklenecektir. Yaşattığımız sorun için üzgünüz.",
   "button_cancel": "İptal",
-  "button_understand": "Anladım"
+  "button_understand": "Anladım",
+  "this_field_cannot_be_empty": "Bu alan boş bırakılamaz"
 }

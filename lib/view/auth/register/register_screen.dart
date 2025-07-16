@@ -18,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _rePasswordController = TextEditingController();
   final TextEditingController _fullNameController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -43,6 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         parts: parts,
         linkText: linkText,
         navigationService: _navigationService,
+        formKey: _formKey,
       ),
     );
   }

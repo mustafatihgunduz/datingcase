@@ -88,7 +88,7 @@ class OfferBox extends StatelessWidget {
                   bottom: KStyles.kFifteenSize,
                 ),
                 child: Divider(
-                  color: KStyles.kWhiteColor.withValues(alpha: 0.1),
+                  color: KStyles.kWhiteColor.withValues(alpha: 0.5),
                 ),
               ),
               Column(

@@ -9,30 +9,36 @@ class LoginForm extends StatelessWidget {
     super.key,
     required TextEditingController emailController,
     required TextEditingController passwordController,
+    required GlobalKey<FormState> formKey,
   }) : _emailController = emailController,
-       _passwordController = passwordController;
+       _passwordController = passwordController,
+       _formKey = formKey;
 
   final TextEditingController _emailController;
   final TextEditingController _passwordController;
+  final GlobalKey<FormState> _formKey;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextField(
-          controller: _emailController,
-          hintText: LocaleKeys.email.tr(),
-          leadingIcon: 'assets/icons/email.png',
-          hasTrailing: false,
-        ),
-        SizedBox(height: KStyles.kThirteenSize),
-        CustomTextField(
-          controller: _passwordController,
-          hintText: LocaleKeys.password.tr(),
-          leadingIcon: 'assets/icons/password.png',
-          hasTrailing: true,
-        ),
-      ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          CustomTextField(
+            controller: _emailController,
+            hintText: LocaleKeys.email.tr(),
+            leadingIcon: 'assets/icons/email.png',
+            hasTrailing: false,
+          ),
+          SizedBox(height: KStyles.kThirteenSize),
+          CustomTextField(
+            controller: _passwordController,
+            hintText: LocaleKeys.password.tr(),
+            leadingIcon: 'assets/icons/password.png',
+            hasTrailing: true,
+          ),
+        ],
+      ),
     );
   }
 }

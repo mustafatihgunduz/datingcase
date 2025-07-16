@@ -11,49 +11,55 @@ class RegisterForm extends StatelessWidget {
     required TextEditingController emailController,
     required TextEditingController passwordController,
     required TextEditingController rePasswordController,
+    required GlobalKey<FormState> formKey,
   }) : _fullNameController = fullNameController,
        _emailController = emailController,
        _passwordController = passwordController,
-       _rePasswordController = rePasswordController;
+       _rePasswordController = rePasswordController,
+       _formKey = formKey;
 
   final TextEditingController _fullNameController;
   final TextEditingController _emailController;
   final TextEditingController _passwordController;
   final TextEditingController _rePasswordController;
+  final GlobalKey<FormState> _formKey;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextField(
-          controller: _fullNameController,
-          hintText: LocaleKeys.fullname.tr(),
-          leadingIcon: 'assets/icons/user.png',
-          hasTrailing: false,
-        ),
-        SizedBox(height: KStyles.kThirteenSize),
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          CustomTextField(
+            controller: _fullNameController,
+            hintText: LocaleKeys.fullname.tr(),
+            leadingIcon: 'assets/icons/user.png',
+            hasTrailing: false,
+          ),
+          SizedBox(height: KStyles.kThirteenSize),
 
-        CustomTextField(
-          controller: _emailController,
-          hintText: LocaleKeys.email.tr(),
-          leadingIcon: 'assets/icons/email.png',
-          hasTrailing: false,
-        ),
-        SizedBox(height: KStyles.kThirteenSize),
-        CustomTextField(
-          controller: _passwordController,
-          hintText: LocaleKeys.password.tr(),
-          leadingIcon: 'assets/icons/password.png',
-          hasTrailing: true,
-        ),
-        SizedBox(height: KStyles.kThirteenSize),
-        CustomTextField(
-          controller: _rePasswordController,
-          hintText: LocaleKeys.re_password.tr(),
-          leadingIcon: 'assets/icons/password.png',
-          hasTrailing: true,
-        ),
-      ],
+          CustomTextField(
+            controller: _emailController,
+            hintText: LocaleKeys.email.tr(),
+            leadingIcon: 'assets/icons/email.png',
+            hasTrailing: false,
+          ),
+          SizedBox(height: KStyles.kThirteenSize),
+          CustomTextField(
+            controller: _passwordController,
+            hintText: LocaleKeys.password.tr(),
+            leadingIcon: 'assets/icons/password.png',
+            hasTrailing: true,
+          ),
+          SizedBox(height: KStyles.kThirteenSize),
+          CustomTextField(
+            controller: _rePasswordController,
+            hintText: LocaleKeys.re_password.tr(),
+            leadingIcon: 'assets/icons/password.png',
+            hasTrailing: true,
+          ),
+        ],
+      ),
     );
   }
 }

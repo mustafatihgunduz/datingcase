@@ -1,6 +1,8 @@
+import 'package:datingcase/core/services/firebase_analytics_service.dart';
 import 'package:datingcase/core/services/navigation_service.dart';
 import 'package:datingcase/core/viewmodel/movie_view_model.dart';
 import 'package:datingcase/view/home/components/movie_card.dart';
+import 'package:datingcase/view/home/components/movie_card_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +21,7 @@ class MovieBuilder extends StatelessWidget {
     return BlocBuilder<MovieBloc, MovieState>(
       builder: (context, state) {
         if (state is MovieLoading) {
-          return Center(child: CircularProgressIndicator());
+          return MovieCardShimmer();
         } else if (state is MovieLoaded) {
           return RefreshIndicator(
             onRefresh: () async {
@@ -40,6 +42,10 @@ class MovieBuilder extends StatelessWidget {
                   return MovieCard(
                     movie: movie,
                     onFavoriteTap: () {
+                      FirebaseAnalyticsService().logAddToFavorites(
+                        movieId: movie.id,
+                        movieTitle: movie.title!,
+                      );
                       context.read<MovieBloc>().add(
                         ToggleFavoriteMovie(movie.id),
                       );
@@ -47,7 +53,7 @@ class MovieBuilder extends StatelessWidget {
                     navigationService: _navigationService,
                   );
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return MovieCardShimmer();
                 }
               },
             ),

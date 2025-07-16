@@ -40,5 +40,6 @@
   "sorry": "Sorry",
   "will_be_add_later": "This feature will be added in the next updates.We are sorry for the inconvenience.",
   "button_cancel": "Cancel",
-  "button_understand": "Understand"
+  "button_understand": "Understand",
+  "this_field_cannot_be_empty": "This field cannot be empty"
 }

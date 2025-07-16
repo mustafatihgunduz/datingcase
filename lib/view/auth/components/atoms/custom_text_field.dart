@@ -1,4 +1,6 @@
 import 'package:datingcase/constants/styles.dart';
+import 'package:datingcase/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -29,6 +31,12 @@ class CustomTextField extends StatelessWidget {
         trailingIcon: trailingIcon,
         hasTrailing: hasTrailing,
       ),
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return LocaleKeys.this_field_cannot_be_empty.tr();
+        }
+        return null;
+      },
     );
   }
 }

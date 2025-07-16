@@ -2,6 +2,7 @@ import 'package:datingcase/core/repository/auth_repository.dart';
 import 'package:datingcase/core/repository/movie_repository.dart';
 import 'package:datingcase/core/repository/user_repository.dart';
 import 'package:datingcase/core/services/auth_service.dart';
+import 'package:datingcase/core/services/firebase_analytics_service.dart';
 import 'package:datingcase/core/services/movie_service.dart';
 import 'package:datingcase/core/services/navigation_service.dart';
 import 'package:datingcase/core/services/secure_storage_service.dart';
@@ -22,6 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
+  await FirebaseAnalyticsService().logAppOpen();
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('tr')],

@@ -45,5 +45,6 @@ abstract class  LocaleKeys {
   static const will_be_add_later = 'will_be_add_later';
   static const button_cancel = 'button_cancel';
   static const button_understand = 'button_understand';
+  static const this_field_cannot_be_empty = 'this_field_cannot_be_empty';
 
 }

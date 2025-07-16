@@ -82,7 +82,8 @@ class AuthService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return data['photoUrl'] as String;
+      final photoUrl = data['data']['photoUrl'] as String;
+      return photoUrl;
     } else {
       throw Exception('Failed to upload photo: ${response.statusCode}');
     }
