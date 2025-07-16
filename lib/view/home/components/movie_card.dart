@@ -1,15 +1,18 @@
+import 'package:datingcase/constants/styles.dart';
 import 'package:datingcase/core/model/movie.dart';
+import 'package:datingcase/core/services/navigation_service.dart';
 import 'package:datingcase/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
   final VoidCallback onFavoriteTap;
-
+  final NavigationService navigationService;
   const MovieCard({
     super.key,
     required this.movie,
     required this.onFavoriteTap,
+    required this.navigationService,
   });
 
   @override
@@ -32,34 +35,55 @@ class MovieCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 0,
-            child: Container(
-              padding: EdgeInsets.all(8),
-              width: MediaQuery.of(context).size.width,
-              color: Colors.black54,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            bottom: 26,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: KStyles.kThirtyThreeSize,
+              ),
+              child: Row(
                 children: [
-                  Text(movie.title!, style: TextStyle(color: Colors.white)),
-                  Text(
-                    movie.description!,
-                    style: TextStyle(color: Colors.white70),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  Image.asset('assets/icons/movie_header.png'),
+                  SizedBox(width: KStyles.kNineSize),
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 250),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          movie.title!,
+                          style: KStyles.kMovieCardTitleTextStyle(context),
+                        ),
+                        Text(
+                          movie.description!,
+                          style: KStyles.kMovieCardDescriptionTextStyle(
+                            context,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ),
           Positioned(
-            top: 8,
-            right: 8,
-            child: IconButton(
-              icon: Icon(
-                movie.isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: Colors.red,
+            bottom: SizeConfig.screenHeight! / 10,
+            right: 16,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: KStyles.kThirteenSize / 2,
+                vertical: KStyles.kTwentySize,
               ),
-              onPressed: onFavoriteTap,
+              decoration: KStyles.kAddPhotoContainerDecoration(),
+              child: IconButton(
+                icon: Icon(
+                  movie.isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: KStyles.kWhiteColor,
+                ),
+                onPressed: onFavoriteTap,
+              ),
             ),
           ),
         ],

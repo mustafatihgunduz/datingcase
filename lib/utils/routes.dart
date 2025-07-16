@@ -1,7 +1,7 @@
 import 'package:datingcase/bottom_navigation_bar.dart';
-import 'package:datingcase/view/auth/login_screen.dart';
-import 'package:datingcase/view/auth/register_screen.dart';
-import 'package:datingcase/view/auth/user_information_screen.dart';
+import 'package:datingcase/view/auth/login/login_screen.dart';
+import 'package:datingcase/view/auth/register/register_screen.dart';
+import 'package:datingcase/view/auth/information/user_information_screen.dart';
 import 'package:datingcase/view/home/home_screen.dart';
 import 'package:flutter/material.dart';
 

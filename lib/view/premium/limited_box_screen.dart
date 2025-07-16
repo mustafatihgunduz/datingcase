@@ -1,17 +1,17 @@
 import 'package:datingcase/constants/styles.dart';
 import 'package:datingcase/generated/locale_keys.g.dart';
 import 'package:datingcase/utils/size_config.dart';
+import 'package:datingcase/view/auth/components/atoms/custom_auth_button.dart';
 import 'package:datingcase/view/premium/components/bonuses_container_item.dart';
+import 'package:datingcase/view/premium/components/offer_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
 
 class LimitedBoxScreen extends StatelessWidget {
   const LimitedBoxScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    print(SizeConfig.screenWidth! * 0.07);
     return Container(
       decoration: BoxDecoration(
         gradient: RadialGradient(
@@ -23,7 +23,7 @@ class LimitedBoxScreen extends StatelessWidget {
       ),
       constraints: BoxConstraints(
         minWidth: double.infinity,
-        minHeight: SizeConfig.screenHeight! * 0.8,
+        minHeight: SizeConfig.screenHeight! * 0.7,
       ),
       child: SingleChildScrollView(
         child: Padding(
@@ -117,23 +117,35 @@ class LimitedBoxScreen extends StatelessWidget {
                   style: KStyles.kLimitedBoxTitleTextStyle(context),
                 ),
               ),
-              badges.Badge(
-                badgeContent: Text(
-                  '+10%',
-                  style: KStyles.kLimitedBoxDescriptionTextStyle(context),
-                ),
-                badgeStyle: badges.BadgeStyle(
-                  shape: badges.BadgeShape.square,
-                  borderRadius: BorderRadius.circular(24),
-                  borderSide: BorderSide(
-                    color: Colors.white.withValues(alpha: 0.5),
+              SizedBox(height: KStyles.kFifteenSize),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  OfferBox(
+                    discountNumber: '+10%',
+                    oldNumber: '200',
+                    newNumber: '300',
+                    price: '₺99,99',
                   ),
-
-                  padding: EdgeInsetsGeometry.symmetric(
-                    horizontal: KStyles.kFifteenSize,
-                    vertical: KStyles.kFourSize,
+                  OfferBox(
+                    discountNumber: '+70%',
+                    oldNumber: '2000',
+                    newNumber: '3375',
+                    price: '₺799,99',
+                    isMiddle: true,
                   ),
-                ),
+                  OfferBox(
+                    discountNumber: '+35%',
+                    oldNumber: '1000',
+                    newNumber: '1350',
+                    price: '₺399,99',
+                  ),
+                ],
+              ),
+              SizedBox(height: KStyles.kEighteenSize),
+              CustomAuthButton(
+                title: LocaleKeys.see_all_tokens.tr(),
+                onTap: () {},
               ),
             ],
           ),

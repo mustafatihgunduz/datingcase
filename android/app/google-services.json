@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "388011647680",
+    "project_id": "datingcase",
+    "storage_bucket": "datingcase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388011647680:android:a844a8d2bc9022728f8325",
+        "android_client_info": {
+          "package_name": "com.datingcase.datingcase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBscTZuG0a6gCkaCXROD-kOnbcsB3k7T-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

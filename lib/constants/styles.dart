@@ -25,11 +25,13 @@ class KStyles {
   static double kThirtySevenSize = SizeConfig.screenWidth! * 0.084;
   static double kSeventySize = SizeConfig.screenWidth! * 0.16; //* 70px
   static double kTwentySize = SizeConfig.screenWidth! * 0.051; //*20px
+  static double kFourtyFiveSize = SizeConfig.screenWidth! * 0.102; //* 45px
   static Color kWhiteColor = const Color(0xFFFFFFFF);
   static Color kButtonColor = const Color(0xffE50914);
   static Color kLimitedBoxShadowColor = const Color(0xff6F060B);
+  static Color kLimitedBoxMiddleColor = const Color(0xff5949E6);
   static BorderRadius kBorderRadius = BorderRadius.circular(18.0);
-  static BorderRadius kBottomNavbarRadius = BorderRadius.circular(5.0);
+  static BorderRadius kBottomNavbarRadius = BorderRadius.circular(20.0);
   static BorderRadius kAddPhotoRadius = BorderRadius.circular(33.0);
   static EdgeInsets kButtonPadding = EdgeInsets.symmetric(
     vertical: SizeConfig.screenWidth! * 0.0438, //* 17 px
@@ -207,8 +209,30 @@ class KStyles {
       fontFamily: fontFamily,
       fontSize: kTwentySixSize,
       color: kWhiteColor,
-      decoration: TextDecoration.lineThrough,
+      decoration: TextDecoration.none,
       fontWeight: FontWeight.bold,
+    );
+    return kLimitedBoxTitleTextStyle;
+  }
+
+  static TextStyle kMovieCardTitleTextStyle(BuildContext context) {
+    var kLimitedBoxTitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kEighteenSize,
+      color: kWhiteColor,
+      decoration: TextDecoration.none,
+      fontWeight: FontWeight.bold,
+    );
+    return kLimitedBoxTitleTextStyle;
+  }
+
+  static TextStyle kMovieCardDescriptionTextStyle(BuildContext context) {
+    var kLimitedBoxTitleTextStyle = TextStyle(
+      fontFamily: fontFamily,
+      fontSize: kThirteenSize,
+      color: kWhiteColor.withValues(alpha: 0.75),
+      decoration: TextDecoration.none,
+      fontWeight: FontWeight.normal,
     );
     return kLimitedBoxTitleTextStyle;
   }
